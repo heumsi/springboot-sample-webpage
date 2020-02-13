@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "noImplicitAny": false
+  },
+  "files": [
+    "../../index.d.ts",
+    "./type-tests.ts"
+  ]
+}

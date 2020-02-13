@@ -1,0 +1,51 @@
+:root {
+    --color-bright-black: #848484;
+    --color-dark-black: #2c2c2c;
+    --color-a-hover: #545273;
+    --color-list-hover: #545273;
+    --color-list-clicked: #545273;
+    --color-blank-image: #545273;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3{
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 160%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--color-a-hover);
+}
