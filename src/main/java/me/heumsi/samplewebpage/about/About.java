@@ -21,6 +21,36 @@ public class About {
     @CreationTimestamp
     private LocalDateTime createdTimeAt;
 
-    @UpdateTimestamp
-    private LocalDateTime updateTimeAt;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getCreatedTimeAt() {
+        return createdTimeAt;
+    }
+
+    public void setCreatedTimeAt(LocalDateTime createdTimeAt) {
+        this.createdTimeAt = createdTimeAt;
+    }
+
+    @Override
+    public String toString() {
+        return "About{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", createdTimeAt=" + createdTimeAt +
+                '}';
+    }
 }

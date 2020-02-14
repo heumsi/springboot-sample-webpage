@@ -23,7 +23,7 @@
     $(document).ready(() => {
 
         // tui editor 초기화
-        var editor = new tui.Editor({
+        const editor = new tui.Editor({
             el: document.querySelector('#editorSection'),
             initialEditType: 'wysiwyg',
             previewStyle: 'vertical',
@@ -34,13 +34,8 @@
             placeholder: '여기에 내용을 입력해주세요.'
         });
 
-        // datetime 초기화
-        $('input[name$="date"]')[0].valueAsDate = new Date()
-
-        var coverBase64Image = null; // 커버 이미지는 최종적으로 이 변수에 담깁니다.
-
-        // TODO : server 로 data 를 GET 하는 작업
-        // 여기에 코드를 입력해주세요.
+        // server 로 data 를 GET 하는 작업
+        editor.setHtml(`{{{content}}}`)
 
         /**** 이벤트 핸들러 등록 ****/
         // * 제출 버튼 누를 시.
@@ -48,11 +43,23 @@
             let content = editor.getHtml()
 
             let data = {
-                'content': content,
+                'content': content
             }
 
-            // TODO : server 로 data 를 POST 하는 작업
-            // 여기에 코드를 입력해주세요.
+            // server 로 data 를 POST 하는 작업
+            $.ajax({
+                method: 'POST',
+                url: '/about-edit',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json"
+            }).done((data) => {
+                // 성공 시, about 페이지로 리다이렉트.
+                window.location = "/about"
+            }).fail((error)=> {
+                // 실패 시, 알림창 띄움.
+                alert("작업 중 에러가 발생했습니다.")
+            })
         })
     })
 </script>
