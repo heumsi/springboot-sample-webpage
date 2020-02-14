@@ -16,6 +16,9 @@ public class AboutServiceTest {
     @Autowired
     AboutService aboutService;
 
+    /** getRecentContent 가 잘 작동하는지에 대한 테스트
+     * DB 에 객체를 넣고, getRecentContent 로 두 객체가 일치하는지 확인합니다.
+     **/
     @Test
     public void getRecentContent() {
         About about = new About();

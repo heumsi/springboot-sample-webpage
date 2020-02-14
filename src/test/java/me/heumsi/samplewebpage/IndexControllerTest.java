@@ -19,6 +19,9 @@ public class IndexControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    /** GET / 요청에 대한 테스트
+     * 응답하는 뷰 템플릿이 index 이어야 합니다.
+     **/
     @Test
     public void getIndex() throws Exception {
         mockMvc.perform(get("/"))

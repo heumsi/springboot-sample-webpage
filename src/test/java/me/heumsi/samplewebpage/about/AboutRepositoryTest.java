@@ -18,6 +18,9 @@ public class AboutRepositoryTest {
     @Autowired
     AboutRepository aboutRepository;
 
+    /** aboutRepository 가 DB 에 잘 연동되었는지에 대한 테스트
+     * DB 에 객체가 잘 들어가는지 확인합니다.
+     **/
     @Test
     public void di(){
         About about = new About();

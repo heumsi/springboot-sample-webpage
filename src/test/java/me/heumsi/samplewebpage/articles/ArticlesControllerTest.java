@@ -19,6 +19,9 @@ public class ArticlesControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    /** GET /articles 요청에 대한 테스트
+     * 응답하는 뷰 템플릿이 page/articles 이어야 합니다.
+     **/
     @Test
     public void getArticles() throws Exception {
         mockMvc.perform(get("/articles"))
@@ -26,6 +29,9 @@ public class ArticlesControllerTest {
                 .andExpect(view().name("page/articles"));
     }
 
+    /** GET /article-detail 요청에 대한 테스트
+     * 응답하는 뷰 템플릿이 page/article_detail 이어야 합니다.
+     **/
     @Test
     public void getArticleDetail() throws Exception {
         mockMvc.perform(get("/article-detail"))
@@ -33,6 +39,9 @@ public class ArticlesControllerTest {
                 .andExpect(view().name("page/article_detail"));
     }
 
+    /** GET /article-edit 요청에 대한 테스트
+     * 응답하는 뷰 템플릿이 page/article_edit 이어야 합니다.
+     **/
     @Test
     public void getArticleEdit() throws Exception {
         mockMvc.perform(get("/article-edit"))

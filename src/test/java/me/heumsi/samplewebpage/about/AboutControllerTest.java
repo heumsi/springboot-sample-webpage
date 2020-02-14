@@ -24,6 +24,9 @@ public class AboutControllerTest {
     @MockBean
     AboutService aboutService;
 
+    /** GET /about 요청에 대한 테스트
+     * 응답하는 뷰 템플릿이 page/about 이어야 합니다.
+     **/
     @Test
     public void getAbout() throws Exception {
         when(aboutService.getRecentContent()).thenReturn("test");
@@ -33,6 +36,9 @@ public class AboutControllerTest {
                 .andExpect(view().name("page/about"));
     }
 
+    /** GET /about-edit 요청에 대한 테스트
+     * 응답하는 뷰 템플릿이 page/about_edit 이어야 합니다.
+     **/
     @Test
     public void getAboutEdit() throws Exception {
         when(aboutService.getRecentContent()).thenReturn("test");
