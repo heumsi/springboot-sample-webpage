@@ -1,6 +1,6 @@
 package me.heumsi.samplewebpage;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,13 +14,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(IndexController.class)
-class IndexControllerTest {
+public class IndexControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
-    void getIndex() throws Exception {
+    public void getIndex() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));

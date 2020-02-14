@@ -1,6 +1,6 @@
 package me.heumsi.samplewebpage.articles;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,27 +14,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ArticlesController.class)
-class ArticlesControllerTest {
+public class ArticlesControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
-    void getArticles() throws Exception {
+    public void getArticles() throws Exception {
         mockMvc.perform(get("/articles"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("page/articles"));
     }
 
     @Test
-    void getArticleDetail() throws Exception {
+    public void getArticleDetail() throws Exception {
         mockMvc.perform(get("/article-detail"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("page/article_detail"));
     }
 
     @Test
-    void getArticleEdit() throws Exception {
+    public void getArticleEdit() throws Exception {
         mockMvc.perform(get("/article-edit"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("page/article_edit"));
