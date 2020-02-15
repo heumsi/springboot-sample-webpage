@@ -177,6 +177,27 @@ body {
     display: inline-block;
 }
 
+.content>.content-item>.btn-more {
+    width: 160px;
+    height: 50px;
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-bright-black);
+    font-size: 14px;
+}
+
+.content>.content-item>.btn-more:hover {
+    border: 1px solid var(--color-dark-black);
+}
+
+.content>.content-item>.btn-more>span {
+    max-width: 50%;
+}
+
 /* cover (in container) */
 .cover {
     background-color: var(--color-blank-image);
@@ -460,9 +481,9 @@ textarea:focus {
     margin-bottom: 40px;
 
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr minmax(0, 3fr);
     display: -ms-grid;
-    -ms-grid-columns: 1fr 3fr;
+    -ms-grid-columns: 1fr minmax(0, 3fr);
 }
 
 .article-list>.article-item>a>.item-img-box {
@@ -580,6 +601,12 @@ textarea:focus {
         font-size: 20px;
     }
 
+    .content>.content-item>.btn-more {
+        width: 140px;
+        height: 40px;
+        font-size: 12px;
+    }
+
     .footer>.footer-container>h3 {
         font-size: 14px;
         margin-bottom: 20px;
@@ -597,7 +624,7 @@ textarea:focus {
     .intro-view {
         width: 100%;
         margin-top: 20px;
-        
+
         display: grid;
         grid-template-columns: 1fr;
         display: -ms-grid;
@@ -641,12 +668,12 @@ textarea:focus {
         padding-bottom: 10px;
         font-size: 20px;
     }
-    
+
     .item-description>h5 {
         padding-bottom: 20px;
         font-size: 16px;
     }
-    
+
     .item-description>p {
         height: 75px;
         margin: 0;

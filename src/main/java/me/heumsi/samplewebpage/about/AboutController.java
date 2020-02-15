@@ -33,10 +33,7 @@ public class AboutController {
     }
 
     @PostMapping("/about-edit")
-    public @ResponseBody About postAboutEdit(Model model, @RequestBody About about) {
-
-        About newAbout = aboutService.insertAbout(about);
-
-        return newAbout;
+    public @ResponseBody About postAbout(@RequestBody About about) {
+        return aboutService.insertAbout(about);
     }
 }

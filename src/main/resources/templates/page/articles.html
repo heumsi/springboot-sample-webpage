@@ -1,77 +1,87 @@
 {{>layout/header}}
-    <div class="container">
-        <div class="content">
-            <div class="content-item">
-                <div class="content-title">
-                    <h1>ARTICLES</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        Aenean
-                        massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Donec
-                        quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                        Donec pede justo, fringilla vel</p>
-                </div>
-                <div class="top-menu">
-                    <ul>
-                        <li>
-                            <button type="button">
-                                <a href="/article-edit"><i class="fas fa-plus"></i>추가</a>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="article-list">
-                    <div class="article-item">
-                        <a href="/article-detail">
-                            <div class="item-img-box">
-                                <div class="interactive-img"></div>
-                            </div>
-                            <div class="item-description">
-                                <h3>아티클 이름</h3>
-                                <h5>2019.02.12</h5>
-                                <p>아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.
-                                    아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.
-                                    아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="article-item">
-                        <a href="/article-detail">
-                            <div class="item-img-box">
-                                <div class="interactive-img"></div>
-                            </div>
-                            <div class="item-description">
-                                <h3>아티클 이름</h3>
-                                <h5>2019.02.12</h5>
-                                <p>아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.
-                                    아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.
-                                    아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="article-item">
-                        <a href="/article-detail">
-                            <div class="item-img-box">
-                                <div class="interactive-img"></div>
-                            </div>
-                            <div class="item-description">
-                                <h3>아티클 이름</h3>
-                                <h5>2019.02.12</h5>
-                                <p>아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.
-                                    아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.
-                                    아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다. 아티클에 대해 요약된 글이 여기에 들어갑니다.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
+<div class="container">
+    <div class="content">
+        <div class="content-item">
+            <div class="content-title">
+                <h1>ARTICLES</h1>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                    Aenean
+                    massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                    Donec
+                    quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                    Donec pede justo, fringilla vel</p>
             </div>
+            <div class="top-menu">
+                <ul>
+                    <li>
+                        <button type="button">
+                            <a href="/article-edit"><i class="fas fa-plus"></i>추가</a>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="article-list">
+                <!-- articleItem 이 여기에 들어갑니다.-->
+            </div>
+            <div class="btn-more"><span>목록 더보기</span></div>
         </div>
-
     </div>
+
+</div>
 {{>layout/footer}}
 
 <script>
-    // TODO : server 로 data 를 GET 하는 작업
-    // 여기에 코드를 입력해주세요.
+    function getArticleHtml(article) {
+        // YYYY-mm-dd 부분만 자름.
+        article.createdTimeAt = article.createdTimeAt.slice(0, 10)
+
+        let html =
+            `<div class="article-item">
+                <a href="/article-detail">
+                    <div class="item-img-box">
+                        <div class="interactive-img center-image" style="background-image: url('${article.coverImage}')"></div>
+                    </div>
+                    <div class="item-description">
+                        <h3>${article.title}</h3>
+                        <h5>${article.createdTimeAt}</h5>
+                        <p>${article.description}</p>
+                    </div>
+                </a>
+            </div>`
+        return html
+    }
+
+    function getArticles(page, size) {
+        $.ajax({
+            method: 'GET',
+            url: '/articles/list',
+            data: {
+                'page': page,
+                'size': size
+            },
+            dataType: "json"
+        }).done((articles) => {
+            for (let article of articles) {
+                let html = getArticleHtml(article)
+                $(".article-list").append(html);
+            }
+
+        }).fail((error) => {
+            // 실패 시, 알림창 띄움.
+            alert("작업 중 에러가 발생했습니다.")
+        })
+    }
+
+    $(document).ready(() => {
+        let page = 0;
+        let size = 1;
+
+        // 최초로 페이지가 열렸을 때, Article 들을 불러와서 배치함.
+        getArticles(page, size)
+
+        // 더보기 버튼이 눌렸을 때, Article 들을 불러와서 배치함.
+        $(".btn-more-articles").click(() => {
+            getArticles(++page, size)
+        })
+    })
 </script>

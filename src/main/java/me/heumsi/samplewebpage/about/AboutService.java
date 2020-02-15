@@ -18,7 +18,6 @@ public class AboutService {
     }
 
     public About insertAbout(About about) {
-        About newAbout = aboutRepository.save(about);
-        return newAbout;
+        return aboutRepository.save(about);
     }
 }

@@ -64,10 +64,13 @@
         /**** 이벤트 핸들러 등록 ****/
         // * 제출 버튼 누를 시.
         $('#submit').click(() => {
+            let descriptionSize = 300
+
             let title = $('input[name$="title"]')[0].value
             let subTitle = $('input[name$="subTitle"]')[0].value
             let publishedDate = $('input[name$="date"]')[0].value
             let content = editor.getHtml()
+            let description = $(content).text().substring(0, descriptionSize)
             let coverImage = coverBase64Image
 
             let data = {
@@ -75,11 +78,24 @@
                 'subTitle': subTitle,
                 'publishedDate': publishedDate,
                 'content': content,
+                'description': description,
                 'coverImage': coverImage
             }
 
-            // TODO : server 로 data 를 POST 하는 작업
-            // 여기에 코드를 입력해주세요.
+            // server 로 data 를 POST 하는 작업
+            $.ajax({
+                method: 'POST',
+                url: '/article-edit',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json"
+            }).done((data) => {
+                // 성공 시, articles 페이지로 리다이렉트.
+                window.location = "/articles"
+            }).fail((error)=> {
+                // 실패 시, 알림창 띄움.
+                alert("작업 중 에러가 발생했습니다.")
+            })
         })
 
         // * 커버 이미지 삭제 버튼 누를 시.

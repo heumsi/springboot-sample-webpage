@@ -29,40 +29,18 @@
             </div>
             <div class="content-item">
                 <div class="content-description">
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque tenetur, sit quis, quam
-                        nulla dignissimos in maiores earum praesentium rem nobis? Dolorem pariatur illo laborum! Libero,
-                        quasi! Odio, quasi est?
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe sint, nihil neque eligendi
-                        adipisci, maiores deleniti et quos sed iure eum! Iste, consequuntur. Corrupti nihil nam
-                        repudiandae debitis non minima!
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt illo et dolore animi
-                        temporibus eaque praesentium labore, voluptatibus sint aspernatur voluptate molestias quaerat
-                        sequi quos alias est dolores! Laborum, ad.
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur perspiciatis, explicabo
-                        incidunt magni aliquam voluptate nesciunt natus impedit veniam numquam. Doloribus ipsam et
-                        aliquid vitae eum deleniti accusantium. Facilis, debitis.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum minus amet necessitatibus
-                        consectetur dolor, error facilis, aperiam similique ullam, nesciunt asperiores id harum
-                        dignissimos eaque? Eum cupiditate quis temporibus odio?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem provident, accusantium
-                        consequuntur perspiciatis maxime, doloribus eos minima dignissimos laudantium reiciendis aut
-                        tenetur totam ex quam commodi vitae! Blanditiis, quo dolor.
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas beatae error laborum vel
-                        aspernatur veniam officiis velit fuga earum, explicabo culpa tempora deserunt, facilis facere
-                        corporis, nesciunt maiores excepturi perferendis.
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa harum porro ipsum inventore!
-                        Architecto repellendus similique aspernatur perferendis voluptatem porro in est itaque aliquid,
-                        ut totam quaerat nulla eligendi veritatis.
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum quasi quam consectetur ut,
-                        voluptates provident, fugit itaque expedita, ea debitis quidem facere voluptatum rem
-                        voluptatibus. Omnis consectetur animi quasi possimus.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, corporis. Minus deleniti
-                        debitis harum sapiente non nesciunt eum! Cum alias labore natus maiores numquam vel voluptates
-                        voluptas. Quo, aperiam accusamus?
-                    </p>
+                    <div id="viewerSection"></div>
                 </div>
             </div>
         </div>
     </div>
 {{>layout/footer}}
+
+<script>
+    const viewer = new tui.Editor.factory({
+        el: document.querySelector('#viewerSection'),
+        viewer: true,
+        height: 'fit-content'
+    })
+    viewer.setValue(`{{{content}}}`);
+</script>
