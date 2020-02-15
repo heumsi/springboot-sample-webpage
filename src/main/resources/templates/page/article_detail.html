@@ -4,9 +4,9 @@
             <div class="cover-mask"></div>
             <div class="cover-inner">
                 <div class="cover-cell content-meta">
-                    <h3 class="title">아티클 제목</h3>
-                    <p class="name">아티클 부제목</p>
-                    <p class="datetime">2020.02.11</p>
+                    <h3 class="title">{{article.title}}</h3>
+                    <p class="name">{{article.subTitle}}</p>
+                    <p class="datetime">{{article.createdTimeAt}}</p>
                 </div>
             </div>
         </div>
@@ -16,12 +16,12 @@
                     <ul>
                         <li>
                             <button type="button">
-                                <a href="/article-edit"><i class="fas fa-edit"></i>수정</a>
+                                <a href="/article-edit/{{article.id}}"><i class="fas fa-edit"></i>수정</a>
                             </button>
                         </li>
                         <li>
                             <button type="button">
-                                <a href=""><i class="fas fa-trash"></i>삭제</a>
+                                <a class="btn-delete"><i class="fas fa-trash"></i>삭제</a>
                             </button>
                         </li>
                     </ul>
@@ -42,5 +42,27 @@
         viewer: true,
         height: 'fit-content'
     })
-    viewer.setValue(`{{{content}}}`);
+    viewer.setValue(`{{{article.content}}}`);
+
+    // YYYY-mm-dd 부분만 자름.
+    $(".datetime").text($(".datetime").text().slice(0, 10))
+
+    // cover image 삽입
+    {{#article.coverImage}}
+        console.log("hi")
+        $('.cover').css("background-image", "url('{{{article.coverImage}}}')")
+    {{/article.coverImage}}
+
+    $(document).ready(() => {
+
+        // 삭제 버튼 눌렀을 시.
+        $(".btn-delete").click(() => {
+            $.ajax({
+                method: 'DELETE',
+                url: '/article-detail/{{article.id}}',
+            })
+            // TODO : 예외처리 코드
+            window.location = "/articles"
+        })
+    })
 </script>

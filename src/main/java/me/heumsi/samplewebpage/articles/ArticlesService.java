@@ -26,4 +26,12 @@ public class ArticlesService {
     public Article insertArticle(Article article) {
         return articlesRepository.save(article);
     }
+
+    public Article getArticle(Long id) {
+        return articlesRepository.findById(id).get();
+    }
+
+    public void deleteArticle(Long id) {
+        articlesRepository.deleteById(id);
+    }
 }

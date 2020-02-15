@@ -98,4 +98,18 @@ public class Article {
     public void setUpdatedTimeAt(LocalDateTime updatedTimeAt) {
         this.updatedTimeAt = updatedTimeAt;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", coverImage='" + coverImage + '\'' +
+                ", title='" + title + '\'' +
+                ", subTitle='" + subTitle + '\'' +
+                ", content='" + content + '\'' +
+                ", description='" + description + '\'' +
+                ", createdTimeAt=" + createdTimeAt +
+                ", updatedTimeAt=" + updatedTimeAt +
+                '}';
+    }
 }
