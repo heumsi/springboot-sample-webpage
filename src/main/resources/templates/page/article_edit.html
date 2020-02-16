@@ -93,13 +93,15 @@
                 'coverImage': coverImage
             }
 
-            // server 로 data 를 POST 하는 작업
+            // server 로 data 를 POST(PUT) 하는 작업
             let url = "/article-edit"
+            let method = "POST"
             {{#is_update}}
                 url += "/{{{article.id}}}"
+                method = "PUT"
             {{/is_update}}
             $.ajax({
-                method: 'POST',
+                method: method,
                 url: url,
                 data: JSON.stringify(data),
                 contentType: "application/json",

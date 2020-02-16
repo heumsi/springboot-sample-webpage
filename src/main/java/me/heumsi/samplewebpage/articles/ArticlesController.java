@@ -55,8 +55,8 @@ public class ArticlesController {
     }
 
     // id 에 해당하는 article 을 업데이트 함.
-    @PostMapping("/article-edit/{id}")
-    public @ResponseBody Article postUpdateArticle(@RequestBody Article article) {
+    @PutMapping("/article-edit/{id}")
+    public @ResponseBody Article putUpdateArticle(@RequestBody Article article) {
         return articlesService.insertArticle(article);
     }
 
