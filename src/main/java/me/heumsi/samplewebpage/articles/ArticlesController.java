@@ -38,9 +38,6 @@ public class ArticlesController {
     // id 에 해당하는 article 을 삭제함.
     @DeleteMapping("/article-detail/{id}")
     public void deleteArticle(@PathVariable(value = "id") Long id) {
-        System.out.println("DELETE");
-        System.out.println(id);
-
         articlesService.deleteArticle(id);
     }
 

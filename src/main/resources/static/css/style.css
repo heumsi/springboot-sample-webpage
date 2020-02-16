@@ -410,7 +410,7 @@ textarea:focus {
 :root {
     --project-item-height: 400px;
     --item-img-box-height: 200px;
-    --item-description-height: calc(100% - var(--item-img-box-height));
+    --item-description-height: 100%;
 }
 
 .project-list {
@@ -499,7 +499,7 @@ textarea:focus {
 .article-list>.article-item>a>.item-description {
     width: 100%;
     height: var(--item-description-height);
-    padding: 20px;
+    padding: 10px 20px;
     grid-column: 2;
     -ms-grid-column: 2;
     display: block;
@@ -681,12 +681,16 @@ textarea:focus {
     }
 
     /* article */
+    .article-list>.article-item>a{
+        grid-template-columns: minmax(0, 1fr);
+        -ms-grid-columns: minmax(0, 1fr);
+    }
     .article-list>.article-item>a>.item-img-box {
         display: none;
     }
 
     .article-list>.article-item>a>.item-description{
-        grid-column: 3;
+        grid-column: 1;
     }
 
 }
