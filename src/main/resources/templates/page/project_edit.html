@@ -18,7 +18,7 @@
                     <input type="text" name="name" placeholder="팀 이름" class="name">
                     <textarea rows="3" name="description" maxlength="200" wrap="virtual"
                         placeholder="프로젝트 내용을 200자 내로 요약해주세요." class="description"></textarea>
-                    <input type="date" name="date_from" class="datetime"> - <input type="date" name="date_to"
+                    <input type="date" name="periodFrom" class="datetime"> - <input type="date" name="periodTo"
                         class="datetime">
                 </div>
             </div>
@@ -44,6 +44,8 @@
 <script>
     $(document).ready(() => {
 
+        var coverBase64Image = null; // 커버 이미지는 최종적으로 이 변수에 담깁니다.
+
         // tui editor 초기화
         var editor = new tui.Editor({
             el: document.querySelector('#editorSection'),
@@ -56,17 +58,32 @@
             placeholder: '여기에 내용을 입력해주세요.'
         });
 
-        var coverBase64Image = null; // 커버 이미지는 최종적으로 이 변수에 담깁니다.
-
-        // TODO : server 로 data 를 GET 하는 작업
-        // 여기에 코드를 입력해주세요.
+        // 기존 Project 을 수정하는 경우, server 로 data 를 GET 하는 작업
+        {{#is_update}}
+            editor.setHtml(`{{{project.content}}}`)
+            $('input[name$="title"]')[0].value = '{{project.title}}'
+            $('input[name$="name"]')[0].value = '{{project.name}}'
+            $('textarea[name$="description"]')[0].value = '{{project.description}}'
+            $('input[name$="periodFrom"]')[0].value = '{{project.periodFrom}}'
+            $('input[name$="periodTo"]')[0].value = '{{project.periodTo}}'
+            {{#project.coverImage}}
+                coverBase64Image = '{{{project.coverImage}}}'
+                $('.cover').css("background-image", `url('${coverBase64Image}')`)
+            {{/project.coverImage}}
+            editor.setHtml(`{{{project.content}}}`)
+        {{/is_update}}
 
         /**** 이벤트 핸들러 등록 ****/
         // * 제출 버튼 누를 시.
         $('#submit').click(() => {
+
+            let descriptionSize = 400
+
             let title = $('input[name$="title"]')[0].value
             let name = $('input[name$="name"]')[0].value
             let description = $('textarea[name$="description"]')[0].value
+            let periodFrom = $('input[name$="periodFrom"]')[0].value
+            let periodTo = $('input[name$="periodTo"]')[0].value
             let content = editor.getHtml()
             let coverImage = coverBase64Image
 
@@ -74,13 +91,34 @@
                 'title': title,
                 'name': name,
                 'description': description,
+                'periodFrom': periodFrom,
+                'periodTo': periodTo,
                 'content': content,
                 'coverImage': coverImage
             }
 
-            // TODO : server 로 data 를 POST 하는 작업
-            // 여기에 코드를 입력해주세요.
+            // server 로 data 를 POST(PUT) 하는 작업
+            let url = "/project-edit"
+            let method = "POST"
 
+            {{#is_update}}
+                url += "/{{project.id}}"
+                method = "PUT"
+            {{/is_update}}
+
+            $.ajax({
+                method: method,
+                url: url,
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json"
+            }).done((data) => {
+                // 성공 시, projects 페이지로 리다이렉트.
+                window.location = "/projects"
+            }).fail((error)=> {
+                // 실패 시, 알림창 띄움.
+                alert("작업 중 에러가 발생했습니다.")
+            })
         })
 
         // * 커버 이미지 삭제 버튼 누를 시.

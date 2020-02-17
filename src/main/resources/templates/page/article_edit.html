@@ -97,7 +97,7 @@
             let url = "/article-edit"
             let method = "POST"
             {{#is_update}}
-                url += "/{{{article.id}}}"
+                url += "/{{article.id}}"
                 method = "PUT"
             {{/is_update}}
             $.ajax({

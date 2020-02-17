@@ -21,51 +21,80 @@
                     </ul>
                 </div>
                 <div class="project-list">
-                    <div class="project-item">
-                        <a href="/project-detail">
-                            <div class="item-img-box">
-                                <div class="interactive-img"></div>
-                            </div>
-                            <div class="item-description">
-                                <h3>프로젝트 이름</h3>
-                                <h5>프로젝트 팀 이름 </h5>
-                                <p>프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.
-                                    프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.
-                                    프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="project-item">
-                        <a href="/project-detail">
-                            <div class="item-img-box">
-                                <div class="interactive-img"></div>
-                            </div>
-                            <div class="item-description">
-                                <h3>프로젝트 이름</h3>
-                                <h5>프로젝트 팀 이름 </h5>
-                                <p>프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.
-                                    프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.
-                                    프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="project-item">
-                        <a href="/project-detail">
-                            <div class="item-img-box">
-                                <div class="interactive-img"></div>
-                            </div>
-                            <div class="item-description">
-                                <h3>프로젝트 이름</h3>
-                                <h5>프로젝트 팀 이름 </h5>
-                                <p>프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.
-                                    프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.
-                                    프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다. 프로젝트에 대한 설명이 여기에 들어갑니다.</p>
-                            </div>
-                        </a>
-                    </div>
+                    <!-- projectItem 이 여기에 들어갑니다.-->
                 </div>
             </div>
         </div>
 
     </div>
 {{>layout/footer}}
+
+<script>
+    function getProjectHtml(project) {
+        // YYYY-mm-dd 부분만 자름.
+        project.createdTimeAt = project.createdTimeAt.slice(0, 10)
+
+        let html =
+            `<div class="project-item">
+                <a href="/project-detail/${project.id}">
+                    <div class="item-img-box">
+                        <div class="interactive-img center-image" style="background-image: url('${project.coverImage}')"></div>
+                    </div>
+                    <div class="item-description">
+                        <h3>${project.title}</h3>
+                        <h5>${project.name}</h5>
+                        <p>${project.description}</p>
+                    </div>
+                </a>
+            </div>`
+        return html
+    }
+
+    function getProjects(page, size) {
+        let is_end = false
+
+        $.ajax({
+            method: 'GET',
+            url: '/projects/list',
+            data: {
+                'page': page,
+                'size': size
+            },
+            async: false,
+            dataType: "json"
+        }).done((projects) => {
+            // 아이템 목록이 있는 경우.
+            if (projects.length > 0) {
+                for (let project of projects) {
+                    let html = getProjectHtml(project)
+                    $(".project-list").append(html);
+                }
+            // 아이템 목록이 없는 경우.
+            } else {
+                is_end = true
+            }
+        }).fail((error) => {
+            // 실패 시, 알림창 띄움.
+            alert("작업 중 에러가 발생했습니다.")
+        })
+
+        return is_end
+    }
+
+    $(document).ready(() => {
+        let page = 0; // 0번 페이지부터 시작.
+        let size = 5; // 한 페이지에 4개씩 아이템 배치.
+
+        // 최초로 페이지가 열렸을 때, Project 들을 불러와서 배치함.
+        getProjects(page, size)
+
+        // 더보기 버튼이 눌렸을 때, Project 들을 불러와서 배치함.
+        $(".btn-more").click(() => {
+            let is_end = getProjects(++page, size)
+            if (is_end) {
+                $(".btn-more").text("목록이 더이상 없습니다.")
+                $(".btn-more").css("border", "none")
+            }
+        })
+    })
+</script>
