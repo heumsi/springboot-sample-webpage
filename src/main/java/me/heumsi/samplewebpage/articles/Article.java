@@ -1,5 +1,6 @@
 package me.heumsi.samplewebpage.articles;
 
+import me.heumsi.samplewebpage.projects.Project;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -111,5 +112,14 @@ public class Article {
                 ", createdTimeAt=" + createdTimeAt +
                 ", updatedTimeAt=" + updatedTimeAt +
                 '}';
+    }
+
+    public void update(Article article) {
+        this.coverImage = article.getCoverImage();
+        this.title = article.getTitle();
+        this.subTitle = article.getSubTitle();
+        this.content = article.getContent();
+        this.description = article.getDescription();
+        this.updatedTimeAt = article.getUpdatedTimeAt();
     }
 }

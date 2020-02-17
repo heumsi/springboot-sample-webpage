@@ -1,5 +1,6 @@
 package me.heumsi.samplewebpage.articles;
 
+import me.heumsi.samplewebpage.projects.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,5 +34,13 @@ public class ArticlesService {
 
     public void deleteArticle(Long id) {
         articlesRepository.deleteById(id);
+    }
+
+    public Article updateArticle(Long id, Article updatedArticle) {
+        Article article = articlesRepository.findById(id).get();
+        article.update(updatedArticle);
+        articlesRepository.save(article);
+
+        return article;
     }
 }

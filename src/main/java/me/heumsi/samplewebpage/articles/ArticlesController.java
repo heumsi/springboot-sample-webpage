@@ -23,7 +23,8 @@ public class ArticlesController {
 
     // page 의 size 만큼 Article 리스트를 Json 으로 리턴함.
     @GetMapping("/articles/list")
-    public @ResponseBody List<Article> getArticles(@RequestParam Integer page, @RequestParam Integer size) {
+    public @ResponseBody
+    List<Article> getArticles(@RequestParam Integer page, @RequestParam Integer size) {
         return articlesService.getArticles(page, size);
     }
 
@@ -53,8 +54,9 @@ public class ArticlesController {
 
     // id 에 해당하는 article 을 업데이트 함.
     @PutMapping("/article-edit/{id}")
-    public @ResponseBody Article putUpdateArticle(@RequestBody Article article) {
-        return articlesService.insertArticle(article);
+    public @ResponseBody
+    Article putUpdateArticle(@PathVariable(value = "id") Long id, @RequestBody Article article) {
+        return articlesService.updateArticle(id, article);
     }
 
     // 새로운 article 을 만드는 뷰를 보여줌.
@@ -66,7 +68,8 @@ public class ArticlesController {
 
     // 새로운 article 을 만듬.
     @PostMapping("/article-edit")
-    public @ResponseBody Article postNewArticle(@RequestBody Article article) {
+    public @ResponseBody
+    Article postNewArticle(@RequestBody Article article) {
         return articlesService.insertArticle(article);
     }
 }
